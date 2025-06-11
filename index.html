@@ -85,22 +85,13 @@
 
         <!-- Sidebar -->
         <aside id="sidebar"
-            class="w-full md:w-80 bg-white dark:bg-slate-800/50 backdrop-blur-sm border-r border-slate-200 dark:border-slate-700 flex-shrink-0">
-            <div class="flex items-center gap-4 p-4 border-b border-slate-200 dark:border-slate-700">
-                <img src="./meo.png" alt="Biểu tượng chủ đề" width="15%" height="15%" />
-
-                <div>
-                    <h2 class="text-xl font-bold text-sky-600 dark:text-sky-400">
-                        Chủ đề TOEIC
-                    </h2>
-                    <p class="text-sm text-slate-500 dark:text-slate-400">
-                        Chọn một chủ đề để bắt đầu
-                    </p>
-                </div>
+            class="fixed top-0 left-0 w-80 h-full bg-white dark:bg-slate-800/95 backdrop-blur-sm border-r border-slate-200 dark:border-slate-700 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex-shrink-0">
+            <div class="p-4 border-b border-slate-200 dark:border-slate-700">
+                <h2 class="text-xl font-bold text-sky-600 dark:text-sky-400">Chủ đề TOEIC</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400">Chọn một chủ đề để bắt đầu</p>
             </div>
             <nav id="topic-list" class="p-2 space-y-1 overflow-y-auto h-[calc(100vh-81px)]"></nav>
         </aside>
-
 
         <!-- Main Content -->
         <main class="flex-1 p-4 sm:p-6 lg:p-8">
@@ -119,16 +110,12 @@
             </div>
 
             <!-- Welcome Screen -->
-            <div id="welcome-screen" class="flex flex-col items-center justify-center h-full text-center">
+            <div id="welcome-screen" class="flex flex-col items-center justify-center h-full text-center mt-16 md:mt-0">
                 <img src="./meo.png" width="10%" height="10%" />
-                <h1 class="text-3xl font-bold text-slate-800 dark:text-white">
-                    Chào mừng bạn!
-                </h1>
-                <p class="mt-2 text-slate-600 dark:text-slate-300">
-                    Hãy chọn một chủ đề từ danh sách bên trái.
-                </p>
+                <h1 class="text-3xl font-bold text-slate-800 dark:text-white">Chào mừng bạn!</h1>
+                <p class="mt-2 text-slate-600 dark:text-slate-300">Hãy bắt đầu bằng cách <span class="md:hidden">mở menu
+                        và </span>chọn một chủ đề.</p>
             </div>
-
 
             <!-- Content Screen (when a topic is selected) -->
             <div id="content-screen" class="hidden">
@@ -246,7 +233,7 @@
     </div>
 
     <script>
-        // FULL DATA:
+        // --- DATA ---
         const vocabularyData = [
             {
                 id: 1,
@@ -5713,7 +5700,6 @@
                 ],
             },
         ];
-
 
         // --- STATE MANAGEMENT ---
         const STORAGE_KEY = 'toeic-vocab-progress';
