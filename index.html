@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Học 600 Từ Vựng TOEIC</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -13,38 +13,16 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-
         /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        .dark ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 10px;
-        }
-
-        .dark ::-webkit-scrollbar-thumb {
-            background: #475569;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
-        }
-
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        .dark ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 10px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+        
         /* Flashcard styles */
-        .flashcard-container {
-            perspective: 1000px;
-        }
-
+        .flashcard-container { perspective: 1000px; }
         .flashcard {
             width: 100%;
             height: 100%;
@@ -52,13 +30,8 @@
             transform-style: preserve-3d;
             transition: transform 0.6s;
         }
-
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .flashcard-front,
-        .flashcard-back {
+        .flashcard.flipped { transform: rotateY(180deg); }
+        .flashcard-front, .flashcard-back {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -70,13 +43,9 @@
             text-align: center;
             padding: 2rem;
         }
-
-        .flashcard-back {
-            transform: rotateY(180deg);
-        }
+        .flashcard-back { transform: rotateY(180deg); }
     </style>
 </head>
-
 <body class="bg-slate-100 dark:bg-slate-900 text-slate-800 dark:text-slate-200">
 
     <div class="relative flex min-h-screen">
@@ -84,8 +53,7 @@
         <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
 
         <!-- Sidebar -->
-        <aside id="sidebar"
-            class="fixed top-0 left-0 w-80 h-full bg-white dark:bg-slate-800/95 backdrop-blur-sm border-r border-slate-200 dark:border-slate-700 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex-shrink-0">
+        <aside id="sidebar" class="fixed top-0 left-0 w-80 h-full bg-white dark:bg-slate-800/95 backdrop-blur-sm border-r border-slate-200 dark:border-slate-700 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex-shrink-0">
             <div class="p-4 border-b border-slate-200 dark:border-slate-700">
                 <h2 class="text-xl font-bold text-sky-600 dark:text-sky-400">Chủ đề TOEIC</h2>
                 <p class="text-sm text-slate-500 dark:text-slate-400">Chọn một chủ đề để bắt đầu</p>
@@ -95,136 +63,95 @@
 
         <!-- Main Content -->
         <main class="flex-1 p-4 sm:p-6 lg:p-8">
-            <!-- Mobile Header -->
+             <!-- Mobile Header -->
             <div class="md:hidden flex items-center justify-between mb-6">
-                <button id="menu-button"
-                    class="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
+                <button id="menu-button" class="p-2 rounded-md text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-                <h1 class="text-xl font-bold text-slate-800 dark:text-white truncate" id="mobile-topic-title">Học 600 Từ
-                    Vựng TOEIC</h1>
+                <h1 class="text-xl font-bold text-slate-800 dark:text-white truncate" id="mobile-topic-title">Học 600 Từ Vựng TOEIC</h1>
             </div>
 
             <!-- Welcome Screen -->
             <div id="welcome-screen" class="flex flex-col items-center justify-center h-full text-center mt-16 md:mt-0">
-                <img src="./meo.png" width="10%" height="10%" />
+                 <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-sky-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v11.494m-9-5.747h18M5.468 18.354l13.064-13.064m-13.064 0l13.064 13.064" />
+                </svg>
                 <h1 class="text-3xl font-bold text-slate-800 dark:text-white">Chào mừng bạn!</h1>
-                <p class="mt-2 text-slate-600 dark:text-slate-300">Hãy bắt đầu bằng cách <span class="md:hidden">mở menu
-                        và </span>chọn một chủ đề.</p>
+                <p class="mt-2 text-slate-600 dark:text-slate-300">Hãy bắt đầu bằng cách <span class="md:hidden">mở menu và </span>chọn một chủ đề.</p>
             </div>
-
+            
             <!-- Content Screen (when a topic is selected) -->
             <div id="content-screen" class="hidden">
                 <div class="hidden md:flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
-                    <h1 id="topic-title"
-                        class="text-2xl lg:text-3xl font-bold text-slate-800 dark:text-white mb-2 sm:mb-0"></h1>
+                    <h1 id="topic-title" class="text-2xl lg:text-3xl font-bold text-slate-800 dark:text-white mb-2 sm:mb-0"></h1>
                 </div>
 
                 <!-- Mode Tabs -->
                 <div class="mb-6 border-b border-slate-200 dark:border-slate-700">
                     <nav class="-mb-px flex space-x-6 overflow-x-auto" id="mode-tabs">
-                        <button data-mode="list"
-                            class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-sky-500 text-sky-600">Học
-                            từ</button>
-                        <button data-mode="flashcard"
-                            class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600">Flashcard</button>
-                        <button data-mode="quiz"
-                            class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600">Trắc
-                            nghiệm</button>
-                        <button data-mode="spelling"
-                            class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600">Kiểm
-                            tra chính tả</button>
+                         <button data-mode="list" class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-sky-500 text-sky-600">Học từ</button>
+                         <button data-mode="flashcard" class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600">Flashcard</button>
+                         <button data-mode="quiz" class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600">Trắc nghiệm</button>
+                         <button data-mode="spelling" class="mode-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300 dark:text-slate-400 dark:hover:text-slate-300 dark:hover:border-slate-600">Kiểm tra chính tả</button>
                     </nav>
                 </div>
-
+                
                 <!-- Word List Mode -->
                 <div id="list-mode">
                     <div class="relative w-full sm:w-64 mb-6">
-                        <input type="text" id="search-bar" placeholder="Tìm kiếm từ..."
-                            class="w-full pl-10 pr-4 py-2 rounded-full bg-slate-200 dark:bg-slate-800 border border-transparent focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition">
-                        <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
+                        <input type="text" id="search-bar" placeholder="Tìm kiếm từ..." class="w-full pl-10 pr-4 py-2 rounded-full bg-slate-200 dark:bg-slate-800 border border-transparent focus:ring-2 focus:ring-sky-500 focus:border-transparent outline-none transition">
+                        <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </div>
                     <div id="word-list" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"></div>
-                    <p id="no-results" class="text-center text-slate-500 dark:text-slate-400 mt-8 hidden">Không tìm thấy
-                        từ vựng nào.</p>
+                    <p id="no-results" class="text-center text-slate-500 dark:text-slate-400 mt-8 hidden">Không tìm thấy từ vựng nào.</p>
                 </div>
 
                 <!-- Flashcard Mode -->
                 <div id="flashcard-mode" class="hidden">
                     <div class="max-w-xl mx-auto">
-                        <div class="flashcard-container w-full h-64 sm:h-80">
-                            <div id="flashcard"
-                                class="flashcard bg-white dark:bg-slate-800 rounded-2xl shadow-lg cursor-pointer border border-slate-200 dark:border-slate-700">
+                         <div class="flashcard-container w-full h-64 sm:h-80">
+                            <div id="flashcard" class="flashcard bg-white dark:bg-slate-800 rounded-2xl shadow-lg cursor-pointer border border-slate-200 dark:border-slate-700">
                                 <div id="flashcard-front" class="flashcard-front"></div>
                                 <div id="flashcard-back" class="flashcard-back"></div>
                             </div>
-                        </div>
-                        <div id="card-progress" class="text-center mt-4 text-slate-500 dark:text-slate-400 font-medium">
-                        </div>
-                        <div class="flex items-center justify-center space-x-4 mt-4">
-                            <button id="prev-card"
-                                class="p-3 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition"><svg
-                                    xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 19l-7-7 7-7" />
-                                </svg></button>
-                            <button id="shuffle-cards"
-                                class="px-6 py-3 rounded-full bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Xáo
-                                trộn</button>
-                            <button id="next-card"
-                                class="p-3 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition"><svg
-                                    xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7" />
-                                </svg></button>
-                        </div>
+                         </div>
+                         <div id="card-progress" class="text-center mt-4 text-slate-500 dark:text-slate-400 font-medium"></div>
+                         <div class="flex items-center justify-center space-x-4 mt-4">
+                            <button id="prev-card" class="p-3 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg></button>
+                            <button id="shuffle-cards" class="px-6 py-3 rounded-full bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Xáo trộn</button>
+                            <button id="next-card" class="p-3 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg></button>
+                         </div>
                     </div>
                 </div>
 
                 <!-- Quiz Mode -->
                 <div id="quiz-mode" class="hidden">
-                    <div class="max-w-2xl mx-auto">
-                        <div id="quiz-container"
-                            class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
-                            <!-- Quiz question will be injected here -->
+                     <div class="max-w-2xl mx-auto">
+                        <div id="quiz-container" class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
+                             <!-- Quiz question will be injected here -->
                         </div>
-                        <div id="quiz-results"
-                            class="hidden text-center bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg">
+                        <div id="quiz-results" class="hidden text-center bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg">
                             <h2 class="text-2xl font-bold mb-2">Hoàn thành!</h2>
                             <p id="quiz-score" class="text-4xl font-bold text-sky-500 my-4"></p>
                             <p id="quiz-feedback-summary" class="text-slate-600 dark:text-slate-300 mb-6"></p>
-                            <button id="restart-quiz"
-                                class="px-6 py-3 rounded-full bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Làm
-                                lại</button>
+                            <button id="restart-quiz" class="px-6 py-3 rounded-full bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Làm lại</button>
                         </div>
-                    </div>
+                     </div>
                 </div>
-
+                
                 <!-- Spelling Mode -->
                 <div id="spelling-mode" class="hidden">
                     <div class="max-w-2xl mx-auto">
-                        <div id="spelling-container"
-                            class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
+                        <div id="spelling-container" class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-700">
                             <!-- Spelling question will be injected here -->
                         </div>
-                        <div id="spelling-results"
-                            class="hidden text-center bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg">
+                        <div id="spelling-results" class="hidden text-center bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg">
                             <h2 class="text-2xl font-bold mb-2">Hoàn thành!</h2>
                             <p id="spelling-score" class="text-4xl font-bold text-sky-500 my-4"></p>
                             <p id="spelling-feedback-summary" class="text-slate-600 dark:text-slate-300 mb-6"></p>
-                            <button id="restart-spelling"
-                                class="px-6 py-3 rounded-full bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Làm
-                                lại</button>
+                            <button id="restart-spelling" class="px-6 py-3 rounded-full bg-sky-600 text-white font-semibold hover:bg-sky-700 transition">Làm lại</button>
                         </div>
                     </div>
                 </div>
@@ -5703,6 +5630,7 @@
 
         // --- STATE MANAGEMENT ---
         const STORAGE_KEY = 'toeic-vocab-progress';
+        let usVoice = null;
         let currentTopicId = null;
         let activeTopicLink = null;
         let currentMode = 'list';
@@ -5766,19 +5694,52 @@
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
             }
         }
+        
+        function showConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 90,
+                origin: { y: 0.6 }
+            });
+        }
+
+        function loadAndSetVoice() {
+            const voices = speechSynthesis.getVoices();
+            const priorityVoices = [
+                "Google US English", 
+                "Microsoft Zira - English (United States)",
+                "Samantha", // Apple voice
+                "Alex"      // Apple voice
+            ];
+
+            let foundPriorityVoice = voices.find(voice => priorityVoices.includes(voice.name) && voice.lang === 'en-US');
+
+            if (foundPriorityVoice) {
+                usVoice = foundPriorityVoice;
+                return;
+            }
+
+            // Fallback to the first available 'en-US' voice
+            usVoice = voices.find(voice => voice.lang === 'en-US');
+        }
 
         function speak(text) {
             if ('speechSynthesis' in window) {
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'en-US';
                 utterance.rate = 0.9;
+                
+                if (usVoice) {
+                    utterance.voice = usVoice;
+                }
+
                 window.speechSynthesis.cancel();
                 window.speechSynthesis.speak(utterance);
             } else {
                 alert("Trình duyệt không hỗ trợ phát âm.");
             }
         }
-
+        
         // --- MODE SWITCHING ---
         function setMode(mode) {
             currentMode = mode;
@@ -5812,7 +5773,7 @@
             );
 
             dom.noResults.classList.toggle('hidden', filteredWords.length > 0);
-
+            
             filteredWords.forEach(word => {
                 const card = document.createElement('div');
                 card.className = "bg-white dark:bg-slate-800 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 p-5 border border-slate-200 dark:border-slate-700";
@@ -5838,7 +5799,7 @@
                 dom.wordList.appendChild(card);
             });
         }
-
+        
         // --- FLASHCARD MODE ---
         function initFlashcardMode(shuffle = false) {
             const topic = vocabularyData.find(t => t.id === currentTopicId);
@@ -5853,7 +5814,7 @@
         function renderCurrentFlashcard() {
             if (flashcardState.deck.length === 0) return;
             const cardData = flashcardState.deck[flashcardState.currentIndex];
-
+            
             dom.flashcardFront.innerHTML = `
                 <div class="relative w-full h-full flex items-center justify-center">
                     <h2 class="text-3xl sm:text-4xl font-bold">${cardData.en}</h2>
@@ -5861,20 +5822,20 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" /></svg>
                     </button>
                 </div>`;
-
+                
             dom.flashcardBack.innerHTML = `<div class="text-xl sm:text-2xl font-semibold">${cardData.vi}<p class="text-base font-normal text-slate-400 mt-2">${cardData.pronunciation}</p></div>`;
             dom.cardProgress.textContent = `${flashcardState.currentIndex + 1} / ${flashcardState.deck.length}`;
-
+            
             setTimeout(() => {
-                speak(cardData.en);
+                 speak(cardData.en);
             }, 200);
 
             dom.flashcardFront.querySelector('.speak-flashcard-btn').addEventListener('click', (e) => {
-                e.stopPropagation();
+                e.stopPropagation(); 
                 speak(cardData.en);
             });
         }
-
+        
         // --- QUIZ MODE ---
         function initQuizMode() {
             const topic = vocabularyData.find(t => t.id === currentTopicId);
@@ -5898,7 +5859,7 @@
             return shuffledWords.map(correctWord => {
                 const distractors = words.filter(w => w.en !== correctWord.en).sort(() => 0.5 - Math.random()).slice(0, 3).map(w => w.vi);
                 const options = shuffleArray([correctWord.vi, ...distractors]);
-                return { question: correctWord.en, options: options, answer: correctWord.vi };
+                return { question: correctWord.en, type: correctWord.type, options: options, answer: correctWord.vi };
             });
         }
 
@@ -5907,12 +5868,22 @@
             dom.quizContainer.innerHTML = `
                 <div class="text-center mb-6">
                     <p class="text-sm text-slate-500 dark:text-slate-400">Chọn nghĩa đúng cho từ:</p>
-                    <h2 class="text-3xl font-bold my-2">${q.question}</h2>
-                    <p class="text-slate-500 dark:text-slate-400">${quizState.currentIndex + 1} / ${quizState.questions.length}</p>
+                    <div class="flex items-center justify-center gap-x-3 my-2">
+                        <h2 class="text-3xl font-bold">${q.question}</h2>
+                        <button class="speak-quiz-btn p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-sky-100 dark:hover:bg-slate-700" title="Nghe lại">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                        </button>
+                    </div>
+                    <p class="text-lg text-slate-500 dark:text-slate-400 font-medium">${q.type}</p>
+                    <p class="text-slate-500 dark:text-slate-400 mt-4">${quizState.currentIndex + 1} / ${quizState.questions.length}</p>
                 </div>
                 <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     ${q.options.map(option => `<button class="quiz-option w-full text-left p-4 rounded-lg bg-slate-100 dark:bg-slate-700 hover:bg-sky-100 dark:hover:bg-sky-900/50 transition">${option}</button>`).join('')}
                 </div>`;
+            
+            speak(q.question);
+            
+            dom.quizContainer.querySelector('.speak-quiz-btn').addEventListener('click', () => speak(q.question));
             dom.quizContainer.querySelectorAll('.quiz-option').forEach(btn => btn.addEventListener('click', handleQuizAnswer));
         }
 
@@ -5925,14 +5896,14 @@
                 quizState.score++;
                 e.target.classList.add('bg-green-500/20', 'border', 'border-green-500', 'text-green-600');
             } else {
-                e.target.classList.add('bg-red-500/20', 'border', 'border-red-500', 'text-red-600');
-                dom.quizContainer.querySelectorAll('.quiz-option').forEach(btn => {
-                    if (btn.textContent.trim() === q.answer) {
-                        btn.classList.add('bg-green-500/20', 'border', 'border-green-500', 'text-green-600');
-                    }
-                });
+                 e.target.classList.add('bg-red-500/20', 'border', 'border-red-500', 'text-red-600');
+                 dom.quizContainer.querySelectorAll('.quiz-option').forEach(btn => {
+                     if (btn.textContent.trim() === q.answer) {
+                         btn.classList.add('bg-green-500/20', 'border', 'border-green-500', 'text-green-600');
+                     }
+                 });
             }
-
+            
             dom.quizContainer.querySelectorAll('.quiz-option').forEach(btn => btn.disabled = true);
 
             setTimeout(() => {
@@ -5949,6 +5920,10 @@
             dom.quizContainer.classList.add('hidden');
             dom.quizResults.classList.remove('hidden');
             const percentage = Math.round((quizState.score / quizState.questions.length) * 100);
+            
+            if (percentage === 100) {
+                showConfetti();
+            }
 
             saveProgress(currentTopicId, 'quiz', percentage);
             updateSidebarProgress(currentTopicId);
@@ -5959,7 +5934,7 @@
             else if (percentage < 80) feedback = "Khá tốt, tiếp tục phát huy!";
             dom.quizResults.querySelector('#quiz-feedback-summary').textContent = `Bạn đã trả lời đúng ${quizState.score} trên ${quizState.questions.length} câu. ${feedback}`;
         }
-
+        
         // --- SPELLING MODE ---
         function initSpellingMode() {
             const topic = vocabularyData.find(t => t.id === currentTopicId);
@@ -5999,12 +5974,12 @@
             const input = dom.spellingContainer.querySelector('#spelling-input');
             const feedback = dom.spellingContainer.querySelector('#spelling-feedback');
             const checkBtn = dom.spellingContainer.querySelector('#check-spelling-btn');
-
+            
             if (!input || !checkBtn) return;
-
+            
             const userAnswer = input.value.trim().toLowerCase();
             const correctAnswer = spellingState.words[spellingState.currentIndex].en.toLowerCase();
-
+            
             input.disabled = true;
             checkBtn.disabled = true;
 
@@ -6028,32 +6003,36 @@
                 }
             }, 2000);
         }
-
+        
         function showSpellingResults() {
             dom.spellingContainer.classList.add('hidden');
             dom.spellingResults.classList.remove('hidden');
 
             const scoreEl = dom.spellingResults.querySelector('#spelling-score');
             const feedbackEl = dom.spellingResults.querySelector('#spelling-feedback-summary');
-
+            
             const percentage = Math.round((spellingState.score / spellingState.words.length) * 100);
 
+            if (percentage === 100) {
+                showConfetti();
+            }
+            
             saveProgress(currentTopicId, 'spelling', percentage);
             updateSidebarProgress(currentTopicId);
-
+            
             scoreEl.textContent = `${percentage}%`;
-
+            
             let feedback = "Làm tốt lắm!";
             if (percentage < 50) feedback = "Cần cố gắng hơn nữa!";
             else if (percentage < 80) feedback = "Khá tốt, tiếp tục phát huy!";
-
+            
             feedbackEl.textContent = `Bạn đã trả lời đúng ${spellingState.score} trên ${spellingState.words.length} từ. ${feedback}`;
         }
 
         // --- SIDEBAR & TOPIC SELECTION ---
         function populateSidebar() {
             const progress = loadProgress();
-            dom.topicList.innerHTML = '';
+            dom.topicList.innerHTML = ''; 
             vocabularyData.forEach(topic => {
                 const link = document.createElement('a');
                 link.href = '#';
@@ -6090,7 +6069,7 @@
             if (topicProgress.spellingScore !== undefined) {
                 progressHTML += `<span class="spelling-score-badge font-semibold text-emerald-600 dark:text-emerald-400">Chính tả: ${topicProgress.spellingScore}%</span>`;
             }
-
+            
             const container = link.querySelector('.progress-container');
             if (container) {
                 container.innerHTML = progressHTML;
@@ -6106,19 +6085,19 @@
             dom.contentScreen.classList.remove('hidden');
             dom.topicTitle.textContent = topic.title;
             dom.mobileTopicTitle.textContent = topic.title;
-
+            
             if (activeTopicLink) {
                 activeTopicLink.classList.remove('bg-sky-100/70', 'dark:bg-sky-500/20');
             }
             linkElement.classList.add('bg-sky-100/70', 'dark:bg-sky-500/20');
             activeTopicLink = linkElement;
-
+            
             dom.searchBar.value = '';
             displayWords(topicId);
             setMode('list');
-
+            
             // Close sidebar on mobile after selection
-            if (window.innerWidth < 768) {
+            if(window.innerWidth < 768) {
                 closeSidebar();
             }
         }
@@ -6135,6 +6114,12 @@
 
         // --- INITIALIZATION ---
         function init() {
+            // Load voices and set the default US voice. This is crucial for consistent pronunciation.
+            loadAndSetVoice();
+            if (speechSynthesis.onvoiceschanged !== undefined) {
+                speechSynthesis.onvoiceschanged = loadAndSetVoice;
+            }
+
             populateSidebar();
 
             dom.menuButton.addEventListener('click', openSidebar);
@@ -6170,5 +6155,4 @@
 
     </script>
 </body>
-
 </html>
